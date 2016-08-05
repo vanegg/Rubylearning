@@ -10,7 +10,7 @@
 # end
 
 def char
-  char_by_char = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"].map { |char| char }.join(", ")
+('A'..'K').map { |char| char }.join(", ")
 end
 
 #test

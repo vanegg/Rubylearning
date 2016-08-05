@@ -8,8 +8,14 @@
 # end
 
 def shopping(list)
-list.join(', ')
+  basket_shopping = nil
+  basket_shopping ||= list.join(', ') 
+
 end
 
 #test
 p shopping(["eggs", "milk", "bread", "orange juice"]) == "eggs, milk, bread, orange juice"
+
+
+# name = name || "Mau"
+# name ||= "Mau"
