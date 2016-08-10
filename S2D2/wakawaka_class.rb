@@ -95,16 +95,15 @@ p waka_code.translate
 
 
 class Person
+  $global
   @@test = "classssss variable"
   def initialize
     @name
   end
 
   def say_hi
-    @name
     puts "Hola"
   end
-
 end
 
 vanessa = Person.new
