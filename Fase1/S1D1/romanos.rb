@@ -2,73 +2,24 @@
 # Primero intenta escribir el programa utilizando el Case Statement, 
 #luego intenta refactorizarlo a utilizar un método más complejo, para ello investiga cual es la lógica para pasar de números arábigos a romanos.
 
-# numbers = Hash.new
-numbers = {1 => "I", 2 => "V", 3 => "X", 4 => "L", 5 => "C", 6 => "D", 7 => "M"}
-
 def romandigit2(num, limit, order)
+  numbers = {1 => "I", 2 => "V", 3 => "X", 4 => "L", 5 => "C", 6 => "D", 7 => "M"}
+ 
   case limit
       when "middle" 
         numbers[(order + 1) * 2]
       when "menor"
-        if num == 4 then return "IV" end
+        return  numbers[order * 2 + 1] + numbers[( order + 1 ) * 2] if num == 4
         numbers[order * 2 + 1] * num
-
       when "mayor"
-        if num == 9 then return "IX" end
-        numbers[(order + 1) * 2] + (numbers[order * 2 + 1] * num ) * (num - 5)
-      else ""
-    end
+        return numbers[order * 2 + 1] + numbers[( order + 1 ) * 2 + 1] if num == 9 
+        numbers[( order + 1 ) * 2] + ( numbers[order * 2 + 1] * ( num - 5 ) ) 
+  end
 end
 
-def romandigit(num, limit, order) 
-  case order
-  when 0
-    case limit
-      when "middle" 
-        return "V"
-      when "menor"
-        if num == 4 then return "IV" end
-        "I" * num
-
-      when "mayor"
-        if num == 9 then return "IX" end
-        "V" + "I" * (num - 5)
-      else ""
-    end
-
-  when 1
-    case limit
-      when "middle" 
-        return "L"
-      when "menor"
-        if num == 4 then return "XL" end
-        "X" * num
-
-      when "mayor"
-        if num == 9 then return "XC" end
-        "L" + "X" * (num - 5)
-      else ""
-    end
-
-      when 2
-    case limit
-      when "middle" 
-        return "D"
-      when "menor"
-        if num == 4 then return "CD" end
-        "C" * num
-
-      when "mayor"
-        if num == 9 then return "CM" end
-        "D" + "C" * (num - 5)
-      else ""
-    end
-
-  when 3
-    "M" * num   
-
-  else ""
-  end
+#Method that identifies if a number is closer to 0 or 5
+def higher_lower(num)
+  return num == 5 ? "middle" : num < 5 ? "menor" : "mayor"
 end
 
 def to_roman(num)
@@ -77,21 +28,11 @@ def to_roman(num)
    (digits.length - 1).downto(0) do |order| 
        digit = digits[order].to_i
        limit = higher_lower(digit) 
-       romans += romandigit(digit,limit,order)
+       romans += romandigit2(digit,limit,order)
     end  
     romans
 end
 
-#Method that identifies if a number is closer to 0 or 5
-def higher_lower(num)
-  if num == 5
-    "middle"
-  elsif num < 5
-    "menor"        
-  else
-    "mayor"
-  end
-end
 
 a = to_roman(1) == "I"
 b = to_roman(3) == "III"  
