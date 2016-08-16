@@ -12,6 +12,8 @@ RETURN the pig-latin word
   
 =end
 
+require 'benchmark'
+
 def pig_word(string)
   if string.split(/[aeiouAEIOU].*/) == []
     string + "way"
@@ -51,4 +53,6 @@ def pig_sentence(string)
   pig_latin.strip!
 end
 
-p pig_sentence("This is a big fat pig egg who works at mcdonalds") 
+p pig_sentence("This is a big fat pig egg who works at mcdonalds")
+
+p Benchmark.realtime { pig_sentence("This is a big fat pig egg who works at mcdonalds") } * 10000
