@@ -27,10 +27,6 @@ class Sudoku
     puts
   end
 
-  def solve!
-    check_array
-  end
-
   def create_board
     @array = []
     k= 0
@@ -49,7 +45,7 @@ class Sudoku
     return @array[i][j] == 0 ? true : false
   end
 
-  def check_array
+  def solve!
     @i = 0
     @j = 0
     @k = 0
@@ -61,8 +57,7 @@ class Sudoku
           if zero == true
             @i = l
             @j = m
-            define_box
-            "cero en: i:#{l},j:#{m},k:#{@k}"          
+            define_box        
             nums = [search_row, search_colum, search_box]
             missed_numbers = nums[0] & nums[1] & nums[2]
             if can_set?(missed_numbers) 
@@ -137,6 +132,6 @@ end
  game2.solve!
  game2.board
 
- game3 = Sudoku.new('000716000030050020000000000700000006120030045500000001000000000090040080000182000') #NOFunciona con esa logica
- game3.solve!
- game3.board
+ # game3 = Sudoku.new('000716000030050020000000000700000006120030045500000001000000000090040080000182000') #NOFunciona con esa logica
+ # game3.solve!
+ # game3.board
