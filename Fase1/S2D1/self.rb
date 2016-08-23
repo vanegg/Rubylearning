@@ -9,7 +9,7 @@ regresa el nombre de la clase que lo contiene.
 =end
 
 puts "self es igual a: #{self}"
-
+puts DummyClass.class_method   
 class DummyClass
 
   puts "Esto esta corriendo cuando se define la clase"
