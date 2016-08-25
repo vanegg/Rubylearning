@@ -48,7 +48,6 @@ class PersonParser
 
   def initialize(file)
     @file = file
-    people_return
   end
 
   def people_return
@@ -60,7 +59,7 @@ class PersonParser
   end
 
   def edit(row: nil, first_name: nil, last_name: nil, email: nil, phone: nil, created_at: nil)
-    p @people[row].first_name = first_name unless first_name == nil
+    @people[row].first_name = first_name unless first_name == nil
     @people[row].last_name = last_name unless last_name == nil
     @people[row].email = email unless email == nil
     @people[row].phone = phone unless phone == nil
@@ -76,6 +75,8 @@ end
 person_writer = PersonWriter.new("people.csv", people)
 person_writer.create_csv
 parser = PersonParser.new('people.csv')
-people = parser.people
+people = parser.people_return
 parser.edit(row: 5,first_name:"Vanessa",last_name:"Garcia",email:"van@gmail.com", phone:"555",created_at:"VGG")
-p parser.people
+people_edited = parser.people_return
+person_writer = PersonWriter.new("people.csv", people_edited)
+person_writer.create_csv
